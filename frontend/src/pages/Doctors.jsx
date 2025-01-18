@@ -3,7 +3,6 @@ import { AppContext } from '../context/AppContext'
 import { useNavigate, useParams } from 'react-router-dom'
 
 const Doctors = () => {
-
   const { speciality } = useParams()
 
   const [filterDoc, setFilterDoc] = useState([])
