@@ -111,6 +111,21 @@ const AdminContextProvider = (props) => {
 
     }
 
+    // Getting Doctor profile data from Database using API
+    const getProfileData = async () => {
+        try {
+
+            const { data } = await axios.get(backendUrl + '/api/doctor/profile', { headers: { dToken } })
+            console.log(data.profileData)
+            setProfileData(data.profileData)
+
+        } catch (error) {
+            console.log(error)
+            toast.error(error.message)
+        }
+    }
+
+
 
 
 
