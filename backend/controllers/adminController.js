@@ -4,8 +4,6 @@ import doctorModel from "../models/doctorModel.js";
 import bcrypt from "bcrypt";
 import validator from "validator";
 import { v2 as cloudinary } from "cloudinary";
-import userModel from '../models/userModel.js';
-import 'dotenv'
 
  
 const loginAdmin = async (req, res) => {
@@ -85,9 +83,68 @@ const allDoctors = async (req, res) => {
     }
 }
 
+// API to get all appointments list
+const appointmentsAdmin = async (req, res) => {
+    try {
+
+        const appointments = await appointmentModel.find({})
+        res.json({ success: true, appointments })
+
+    } catch (error) {
+        console.log(error)
+        res.json({ success: false, message: error.message })
+    }
+
+}
+
+
+// API for appointment cancellation
+const appointmentCancel = async (req, res) => {
+    try {
+
+        const { appointmentId } = req.body
+        await appointmentModel.findByIdAndUpdate(appointmentId, { cancelled: true })
+
+        res.json({ success: true, message: 'Appointment Cancelled' })
+
+    } catch (error) {
+        console.log(error)
+        res.json({ success: false, message: error.message })
+    }
+
+}
+
+// API to get dashboard data for admin panel
+const adminDashboard = async (req, res) => {
+    try {
+
+        const doctors = await doctorModel.find({})
+        const users = await userModel.find({})
+        const appointments = await appointmentModel.find({})
+
+        const dashData = {
+            doctors: doctors.length,
+            appointments: appointments.length,
+            patients: users.length,
+            latestAppointments: appointments.reverse()
+        }
+
+        res.json({ success: true, dashData })
+
+    } catch (error) {
+        console.log(error)
+        res.json({ success: false, message: error.message })
+    }
+}
+
+
+
 
 export {
     addDoctor,
     loginAdmin,
     allDoctors,
+    appointmentsAdmin,
+    appointmentCancel,
+    adminDashboard,
 }
