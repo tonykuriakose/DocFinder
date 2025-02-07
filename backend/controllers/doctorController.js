@@ -128,4 +128,5 @@ export {
     loginDoctor,
     appointmentsDoctor,
     appointmentComplete,
+    appointmentCancel,
 }
