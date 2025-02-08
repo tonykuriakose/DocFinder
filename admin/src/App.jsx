@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
-import { DoctorContext } from './context/DoctorContext';
-import { AdminContext } from './context/AdminContext';
+import { DoctorContext } from './context/DoctorContext.jsx';
+import { AdminContext } from './context/AdminContext.jsx';
 import { Route, Routes } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
